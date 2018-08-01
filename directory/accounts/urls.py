@@ -17,4 +17,10 @@ urlpatterns = [
     url(r'signup/$',
         views.SignUp.as_view(),
         name='signup'),
+
+    url(r'^profile/(?P<pk>\d+)/update/$',
+        views.UpdateProfile.as_view(),
+        name='updateprofile'),
+
+
 ]

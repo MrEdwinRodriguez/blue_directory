@@ -1,5 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+
+from accounts.models import User, Profile
+
 
 class UserCreateForm(UserCreationForm):
 
@@ -18,3 +22,17 @@ class UserCreateForm(UserCreationForm):
         self.fields['last_name'].required = True
         self.fields['first_name'].required = True
         self.fields['email'].required = True
+
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('chapters_pledged', 'year_pledged', 'current_chapter', 'major', 'year_graduated', 'current_position', 'linkedin', 'phone_number', 'other_info', 'business')
+
+
