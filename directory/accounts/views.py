@@ -1,12 +1,18 @@
+
+from django.shortcuts import render_to_response
+from django.http import HttpResponse, request
+# from django.core.context_processors import csrf
+from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth.decorators import login_required
 from django.core.checks import messages
 from django.db import transaction
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
 
 from accounts.forms import UserForm, ProfileForm
-from accounts.models import User
+from accounts.models import User, Profile
 from . import forms
 
 
@@ -16,34 +22,53 @@ class SignUp(CreateView):
     model = User
     form_class = forms.UserCreateForm
     success_url = reverse_lazy('home')
-    template_name = 'accounts/updateprofile.html'
+    template_name = 'accounts/signup.html'
+
+
+
 
 
 
 class UpdateProfile(UpdateView):
-
-    model = User
+    model = Profile
     success_url = reverse_lazy('login')
     template_name = 'accounts/signup.html'
+    form_class = ProfileForm
+    # form_classes = {'user': UserForm,
+    #                 'profile': ProfileForm}
 
+    def get_success_url(self):
+        return reverse('home')
 
-    def update_profile(request):
-        if request.method == 'POST':
-            user_form = UserForm(request.POST, instance=request.user)
-            profile_form = ProfileForm(request.POST, instance=request.user.profile)
-            if user_form.is_valid() and profile_form.is_valid():
-                user_form.save()
-                profile_form.save()
-                messages.success(request, _('Your profile was successfully updated!'))
-                return redirect('directory:home')
-            else:
-                messages.error(request, _('Please correct the error below.'))
-        else:
-            user_form = UserForm(instance=request.user)
-            profile_form = ProfileForm(instance=request.user.profile)
-        return render(request, 'profiles/profile.html', {
-            'user_form': user_form,
-            'profile_form': profile_form
-        })
+    def get_object(self):
+        try:
+            return Profile.objects.filter(pk=self.request.user.id).first()
+        except Profile.DoesNotExist:
+            return Profile.objects.none()
+
+    # def update_profile(request):
+    #     if request.method == 'POST':
+    #         user_form = UserForm(request.POST, instance=request.user)
+    #         profile_form = ProfileForm(request.POST, instance=request.user.profile)
+    #         if user_form.is_valid() and profile_form.is_valid():
+    #             user_form.save()
+    #             profile_form.save()
+    #             messages.success(request, _('Your profile was successfully updated!'))
+    #             return redirect('directory:home')
+    #         else:
+    #             messages.error(request, _('Please correct the error below.'))
+    #     else:
+    #         user_form = UserForm(instance=request.user)
+    #         profile_form = ProfileForm(instance=request.user.profile)
+    #     return render(request, 'profiles/profile.html', {
+    #         'user_form': user_form,
+    #         'profile_form': profile_form
+    #     })
+    #
+    # def get_object(self):
+    #     try:
+    #         return User.objects.get(pk=self.request.user.id)
+    #     except User.DoesNotExist:
+    #         return User.objects.none()
 
 
