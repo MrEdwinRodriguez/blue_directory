@@ -22,5 +22,9 @@ urlpatterns = [
         views.UpdateProfile.as_view(),
         name='updateprofile'),
 
+    url(r'^profile/(?P<pk>\d+)/myprofile',
+        views.MyProfile.as_view(),
+        name='myprofile'),
+
 
 ]

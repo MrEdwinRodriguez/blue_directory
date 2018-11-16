@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, request
 # from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
+from django.views import generic
 
 from django.contrib.auth.decorators import login_required
 from django.core.checks import messages
@@ -56,3 +57,18 @@ class UpdateProfile(UpdateView):
         return render(request, 'profiles/profile.html', {
             'profile_form': profile_form
         })
+
+class MyProfile(generic.ListView):
+    model = Profile
+    success_url = reverse_lazy('login')
+    context_object_name = 'user_profile'
+    template_url = 'accounts/profile_list.html'
+
+    def get_object(self):
+        try:
+            queryset = Profile.objects.filter(pk=self.request.user.id).first()
+            print (queryset)
+            return Profile.objects.filter(pk=self.request.user.id).first()
+        except:
+            return Profile.objects.none()
+
