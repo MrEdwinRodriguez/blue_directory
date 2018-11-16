@@ -5,9 +5,30 @@
 
 
     <div class="container">
-        <h1>My Profile</h1>
-            <p>UserName:  {{ user.first_name}} </p>
+        <h1>My Account Info </h1>
+        <p>First Name:  {{ user.first_name}} </p>
+        <p>Last Name:  {{ user.last_name}} </p>
         <p>Email: {{user.email }}</p>
+        <p>Username: {{user.username }}</p>
+        <p>Phone Number: {{ user.phone_number}}</p>
     </div>
+
+    <div class="container">
+        <h1>My Profile </h1>
+        <p>Chapter Pledged:  {{ user.chapters_pledged}} </p>
+        <p>Year Pledged:  {{ user.year_pledged}} </p>
+        <p>Major: {{user.major }}</p>
+        <p>Year Graduated: {{user.year_graduated }}</p>
+        <p>Current Position: {{user.current_position }}</p>
+        {% if user.business %}
+            <p>Business: {{user.business }}</p>
+        {% endif %}
+        {% if user.linkedin %}
+            <p>LinkedIn: {{user.linkedin }}</p>
+        {% endif%}
+
+    </div>
+
+    <a href="{% url 'home' %}" class="btn btn-primary">Return Home</a>
 
 {% endblock %}
