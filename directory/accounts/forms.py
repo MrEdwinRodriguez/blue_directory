@@ -31,5 +31,5 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('chapters_pledged', 'year_pledged', 'current_chapter', 'major', 'year_graduated', 'current_position',
-                  'linkedin', 'phone_number', 'other_info', 'business')
+        fields = ('orginization','chapters_pledged', 'year_pledged', 'current_chapter', 'major', 'year_graduated', 'current_position',
+                  'linkedin', 'phone_number', 'other_info', 'business', 'bio',)

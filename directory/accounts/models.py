@@ -13,8 +13,14 @@ from django.contrib.auth.models import AbstractUser
 #     def __str__(self):
 #         return "@{}".format(self.username)
 
+ORGINIZATION_CHOICES = (
+    ('Phi Beta Sigma','Phi Beta Sigma'),
+    ('Zeta Phi Beta', 'Zeta Phi Beta'),
+)
+
 
 class Profile(AbstractUser):
+    orginization = models.CharField(max_length=128, choices=ORGINIZATION_CHOICES, blank=True, null=True)
     chapters_pledged = models.CharField(max_length=156, blank=True, null=True)
     bio = models.CharField(max_length=560, blank=True, null=True)
     year_pledged = models.IntegerField(blank=True, null=True)

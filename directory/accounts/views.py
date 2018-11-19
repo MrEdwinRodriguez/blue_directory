@@ -61,7 +61,6 @@ class UpdateProfile(UpdateView):
 class MyProfile(generic.ListView):
     model = Profile
     success_url = reverse_lazy('login')
-    context_object_name = 'user_profile'
     template_url = 'accounts/profile_list.html'
 
     def get_object(self):

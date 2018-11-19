@@ -6,25 +6,29 @@
 
     <div class="container">
         <h1>My Account Info </h1>
-        <p>First Name:  {{ user.first_name}} </p>
-        <p>Last Name:  {{ user.last_name}} </p>
-        <p>Email: {{user.email }}</p>
-        <p>Username: {{user.username }}</p>
-        <p>Phone Number: {{ user.phone_number}}</p>
+        <p><strong>First Name:</strong>  {{ user.first_name}} </p>
+        <p><strong>Last Name:</strong>  {{ user.last_name}} </p>
+        <p><strong>Email:</strong> {{user.email }}</p>
+        <p><strong>Username: </strong> {{user.username }}</p>
+        <p><strong>Phone Number: </strong>{{ user.phone_number}}</p>
     </div>
 
     <div class="container">
         <h1>My Profile </h1>
-        <p>Chapter Pledged:  {{ user.chapters_pledged}} </p>
-        <p>Year Pledged:  {{ user.year_pledged}} </p>
-        <p>Major: {{user.major }}</p>
-        <p>Year Graduated: {{user.year_graduated }}</p>
-        <p>Current Position: {{user.current_position }}</p>
+        <p><strong>Orginization Pledged:</strong>  {{ user.orginization}} </p>
+        <p><strong>Chapter Pledged:</strong>  {{ user.chapters_pledged}} </p>
+        <p><strong>Year Pledged:</strong>  {{ user.year_pledged}} </p>
+        <p><strong>Major:</strong> {{user.major }}</p>
+        <p><strong>Year Graduated:</strong> {{user.year_graduated }}</p>
+        <p><strong>Current Position:</strong> {{user.current_position }}</p>
         {% if user.business %}
-            <p>Business: {{user.business }}</p>
+            <p><strong>Business:</strong> {{user.business }}</p>
         {% endif %}
         {% if user.linkedin %}
-            <p>LinkedIn: {{user.linkedin }}</p>
+            <p><strong>LinkedIn:</strong> {{user.linkedin }}</p>
+        {% endif%}
+        {% if user.bio %}
+            <p><strong>Bio:</strong> {{user.bio }}</p>
         {% endif%}
 
     </div>
