@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% block prenetwork %} {% endblock %}
+        {% block network_content %} {% endblock %}
+        {% block postnetwork %} {% endblock %}
+    </div>
+</div>
+
+
+{% endblock %}

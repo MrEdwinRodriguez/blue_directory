@@ -9,19 +9,20 @@ from django.urls import reverse
 
 
  class Network(models.Model):
-     name = models.Charfield(max-length=255, unique=True)
+     name = models.Charfield(max_length=255, unique=True)
      slug = models.Slugfield(allow_unicode=True, unique=True)
      descrription = models.TextField(blank=True, default='')
      description_html = models.textField(editable=False, default='', blank=True)
      members = models.ManytoManyField(User, through='NetworkMember')
 
-     def __str__(self):
-         return self.name
+    def __str__(self):
+        return self.name
 
-     def save(self, *args, **kwargs):
-         self.slug.slugify(self.name)
-         self.descrription_html = misaka.html(self.descrription)
-         super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        self.descrription_html = misaka.html(self.descrription)
+        super().save(*args, **kwargs)
+
 
     def get_absolute_url(self):
         return reverse('networks:single', kwargs={'slug':self.slug})
@@ -41,7 +42,7 @@ from django.urls import reverse
          return self.user.username
 
      class Meta:
-         unique_together = ('netowk, user')
+         unique_together = ('network, user')
 
 
 

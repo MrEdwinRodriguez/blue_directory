@@ -1,0 +1,25 @@
+{% extends "groups/group_base.html %}
+{% block pregroup %}
+
+<h1>{{network.name}}</h1>
+<h2>Member Count: {{Network.members.count}}</h2>
+
+
+<div class="content">
+
+    {%if user in netowrk_members.all%}
+    <a href="{url 'networks:leave' slug=network.slug}" class="btn btn-lg btn-fill btn-warning">
+        <span class="glyphicon glyphicon-remove-circle">Leave</span>
+    </a>
+
+    {% else %}
+
+    <a href="{url 'networkss:join' slug=network.slug}" class="btn btn-lg btn-fill btn-warning">
+        <span class="glyphicon glyphicon-ok-circle">Join</span>
+    </a>
+
+    {% endif %}
+
+</div>
+
+{% endblock%}
